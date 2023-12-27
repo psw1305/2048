@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileNumber: 2
   tileColor: {r: 0.93333334, g: 0.89411765, b: 0.85490197, a: 1}
+  modelMesh: {fileID: 3870414909475259892, guid: 5dd4add76fc8155499387500b907c4cc, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 8edce1fd733683b41b1d29822c31a050, type: 2}
+  - {fileID: 2100000, guid: ec6800c6d9ab9ee45998418731497d7e, type: 2}

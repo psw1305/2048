@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using DG.Tweening;
 using UnityEngine.Events;
 
@@ -7,7 +6,8 @@ public class Tile : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private TextMeshProUGUI numberText;
+    [SerializeField] private MeshFilter meshFilter;
+    [SerializeField] private MeshRenderer meshRenderer;
 
     #endregion
 
@@ -25,8 +25,8 @@ public class Tile : MonoBehaviour
     {
         State = state;
 
-        numberText.color = state.TileColor;
-        numberText.text = state.TileNumber.ToString();
+        meshFilter.mesh = state.ModelMesh;
+        meshRenderer.materials = state.Materials;
     }
 
     public void SetLock(bool isLocked)
