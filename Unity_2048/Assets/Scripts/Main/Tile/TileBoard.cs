@@ -9,8 +9,9 @@ public class TileBoard : MonoBehaviour
     [SerializeField] private TileGrid grid;
 
     private Tile tilePrefab;
-    [SerializeField] private TileState[] tileStates;
+    private TileState[] tileStates;
     private List<Tile> tiles;
+
     private bool isWaiting;
 
     #endregion
@@ -43,7 +44,18 @@ public class TileBoard : MonoBehaviour
     public void CreateTile()
     {
         var tile = Instantiate(tilePrefab, grid.transform);
-        tile.SetState(tileStates[0]);
+
+        // 90% => 2, 10% => 4
+        int random = Random.Range(0, 100);
+        if (random < 10)
+        {
+            tile.SetState(tileStates[1]);
+        }
+        else
+        {
+            tile.SetState(tileStates[0]);
+        }
+
         tile.SpawnTile(grid.GetRandomEmptyCell());
         tiles.Add(tile);
     }
@@ -147,6 +159,7 @@ public class TileBoard : MonoBehaviour
         var newState = tileStates[index];
 
         b.SetState(newState);
+        Manager.Game.AddScore(newState.TileNumber);
     }
 
     private int IndexOf(TileState state)

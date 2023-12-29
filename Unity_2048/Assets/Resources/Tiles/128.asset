@@ -17,8 +17,8 @@ MonoBehaviour:
   modelMesh: {fileID: -8689642310555654980, guid: 3fc7f5d94042dae45a04b94740585336, type: 3}
   materials:
   - {fileID: 2100000, guid: a54baa0ec499dd34f93b0bc641045278, type: 2}
-  - {fileID: 2100000, guid: beb3eee4768d82e4c9aad6e549b86e9b, type: 2}
+  - {fileID: 2100000, guid: 4938d3b68af9d044b8c452948c4ade95, type: 2}
   - {fileID: 2100000, guid: 8edce1fd733683b41b1d29822c31a050, type: 2}
   - {fileID: 2100000, guid: 63823b1712647d54b958f6ec965eb986, type: 2}
-  - {fileID: 2100000, guid: 4938d3b68af9d044b8c452948c4ade95, type: 2}
+  - {fileID: 2100000, guid: beb3eee4768d82e4c9aad6e549b86e9b, type: 2}
   - {fileID: 2100000, guid: d87c12ee04ffbf34aa53369bcae7b581, type: 2}

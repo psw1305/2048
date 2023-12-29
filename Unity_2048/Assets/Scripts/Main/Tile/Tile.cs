@@ -1,13 +1,14 @@
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Tile : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private MeshFilter meshFilter;
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Transform model;
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
 
     #endregion
 
@@ -21,12 +22,20 @@ public class Tile : MonoBehaviour
 
     #region Init
 
+    private void Awake()
+    {
+        meshFilter = model.GetComponent<MeshFilter>();
+        meshRenderer = model.GetComponent<MeshRenderer>();
+    }
+
     public void SetState(TileState state)
     {
         State = state;
 
         meshFilter.mesh = state.ModelMesh;
         meshRenderer.materials = state.Materials;
+
+        SpawnAnimate();
     }
 
     public void SetLock(bool isLocked)
@@ -63,7 +72,7 @@ public class Tile : MonoBehaviour
         Cell = cell;
         Cell.Tile = this;
 
-        Animate(cell.transform.position);
+        MoveAnimate(cell.transform.position);
     }
 
     // 타일 합체
@@ -77,11 +86,24 @@ public class Tile : MonoBehaviour
         Cell = null;
         cell.Tile.SetLock(true);
 
-        Animate(cell.transform.position, DestroyTile);
+        MoveAnimate(cell.transform.position, DestroyAnimate);
     }
 
-    // 타일 애니메이션
-    private void Animate(Vector3 to, UnityAction onComplete = null)
+    #endregion
+
+    #region Tile Animation
+
+    // 모델 생성 애니메이션
+    private void SpawnAnimate()
+    {
+        model.transform.localScale = Vector3.zero;
+
+        model
+            .DOScale(Vector3.one, 0.2f);
+    }
+
+    // 타일 이동 애니메이션
+    private void MoveAnimate(Vector3 to, UnityAction onComplete = null)
     {
         transform
             .DOMove(to, 0.1f)
@@ -91,9 +113,15 @@ public class Tile : MonoBehaviour
             });
     }
 
-    private void DestroyTile()
+    // 타일 파괴 애니메이션
+    private void DestroyAnimate()
     {
-        Destroy(gameObject);
+        model
+            .DOScale(Vector3.zero, 0.1f)
+            .OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
     }
 
     #endregion
